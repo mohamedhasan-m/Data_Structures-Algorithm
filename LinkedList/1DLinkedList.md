@@ -1,4 +1,5 @@
 # Linked List Introduction and Oprations on 1D LinkedList: 
+
 ---
 ## Search in a Linked List (Geeks For Geeks): 
 
@@ -117,6 +118,138 @@ class Solution {
             cnt++;
         }
         return cnt;
+    }
+};
+```
+---
+## Delete Head of Linked List (geeks for Geeks): 
+
+<P>
+  Difficulty: Easy
+
+Given a Linked List, delete the head of the Linked List and return the new head of the modified Linked List.
+Note: Set the original head to NULL.
+
+Examples:
+
+Input:
+
+<img width="737" height="97" alt="image" src="https://github.com/user-attachments/assets/ab260097-fcb6-496c-8db2-53ed6884c500" />
+
+   
+Output: 2 -> 3 -> 1 -> 7
+
+<img width="629" height="98" alt="image" src="https://github.com/user-attachments/assets/68428378-5747-4c0d-94ff-8dd63024e69f" />
+
+Explanation: After deleting head from the given linked list, we'll be left with just 2 -> 3 -> 1 -> 7.
+    
+Input:
+
+<img width="833" height="98" alt="image" src="https://github.com/user-attachments/assets/607d70ca-faea-45b7-aebe-eba65813f53e" />
+
+   
+Output: 5 -> 7 -> 8 -> 99 -> 100
+
+<img width="737" height="97" alt="image" src="https://github.com/user-attachments/assets/e072ba2e-b77d-45e9-a957-40bf5482c3bc" />
+
+Explanation: After deleting head from the given linked list, we'll be left with just 5 -> 7 -> 8 -> 99 -> 100.
+   
+Constraints:
+1 ≤ number of nodes ≤ 105
+1 ≤ node->data ≤ 105
+
+</P>
+
+### Solution: 
+
+```
+/*
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+class Solution {
+  public:
+    Node *deleteHead(Node *head) {
+        // code here
+        if(head == NULL) return head;
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+};
+```
+---
+
+## Linked List Insertion at the Beginnning (Geeks For Geeks): 
+
+  <P>
+  Difficulty: Easy
+
+  You are given the head of a Singly Linked List and a value x, insert that value x at the beginning of the LinkedList and return the head of the modified Linked List.
+
+Examples :
+
+<img width="413" height="97" alt="image" src="https://github.com/user-attachments/assets/fd67eafd-e0a6-4488-8809-d76689585ae9" />
+
+Input: x = 1,
+    
+Output: 1 -> 2 -> 10
+
+<img width="507" height="97" alt="image" src="https://github.com/user-attachments/assets/06ff4ee9-d0b1-4def-98da-420d6278ce88" />
+
+Explanation: We can see that 1 is inserted at the beginning of the linked list.
+
+
+<img width="618" height="97" alt="image" src="https://github.com/user-attachments/assets/ba680e1b-a956-4842-95c7-fdcaed7f572f" />
+
+Input: x = 1,
+    
+Output: 1 -> 2 -> 3 -> 4 -> 5
+
+<img width="777" height="97" alt="image" src="https://github.com/user-attachments/assets/caff37c8-19f3-46a6-8a52-780dc2d20052" />
+
+Explanation: We can see that 1 is inserted at the beginning of the linked list.
+       
+Constraints:
+
+1 ≤ size of linked list ≤ 105
+1 ≤ node.data, x ≤ 103
+
+</P>
+
+### Solution: 
+
+```
+/*
+class Node {
+  public:
+    int data;
+    Node *next;
+
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    Node *insertAtFront(Node *head, int x) {
+        Node* newNode = new Node(x);  
+        newNode->next = head;          
+        head = newNode;                
+        return head;                  
     }
 };
 ```
