@@ -164,4 +164,83 @@ Node* insertAtFront(Node *head, int k) {
 }
 ```
 ---
+## Reverse a Doubly Linked List: (Geeks For Geeks): 
 
+<p>
+  Diffculty: Easy 
+
+  Given the head of a doubly linked list, reverse the list and return the head of the reversed doubly linked list.
+
+Note: Driver code will print the returned list in both forward and backward directions.
+
+Examples:
+
+Input:
+<img width="578" height="136" alt="image" src="https://github.com/user-attachments/assets/693f69d3-27c3-4448-aa9b-9a3ad98a5a9a" />
+
+Output: 
+
+<img width="578" height="136" alt="image" src="https://github.com/user-attachments/assets/b97f08fc-4cee-466e-a763-5e3ebafb10e7" />
+
+5 <-> 4 <-> 3
+3 <-> 4 <-> 5
+Explanation: After reversing the given doubly linked list the new list will be 5 <-> 4 <-> 3.
+
+Input: 
+<img width="844" height="136" alt="image" src="https://github.com/user-attachments/assets/32793d59-8ee4-4d58-963b-ac88725f4235" />
+
+Output: 
+
+<img width="844" height="136" alt="image" src="https://github.com/user-attachments/assets/9083f4b4-9359-4534-8509-94725961be4f" />
+
+196 <-> 59 <-> 122 <-> 75
+75 <-> 122 <-> 59 <-> 196
+Explanation: After reversing the given doubly linked list the new list will be 196 <-> 59 <-> 122 <-> 75.
+
+Constraints:
+
+1 ≤ size of linked list ≤ 106
+0 ≤ node.data ≤ 104
+</p>
+
+### Solution:
+
+```
+/* Structure of Doubly Linked List Node
+class Node {
+  public:
+    int data;
+    Node *next;
+    Node *prev;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+*/
+class Solution {
+  public:
+    Node *reverse(Node *head) {
+        // code here
+        if(head == NULL || head->next == NULL){
+            return head;
+        }
+        
+        Node* prev = NULL;
+        Node* current = head;
+        while(current != NULL){
+            prev = current->prev;
+            
+            current->prev = current->next;
+            current->next = prev;
+            
+            current = current->prev;
+        }
+        return prev->prev;
+    }
+};
+```
+---
