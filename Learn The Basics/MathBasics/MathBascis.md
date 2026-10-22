@@ -626,3 +626,41 @@ public:
 
 ```
 ---
+## LCM Of two Numbers (Geeks For Geeks): 
+
+<P>
+	Difficulty: Easy
+
+	Given two positive integers a and b, find the Least Common Multiple (LCM) of the two numbers.
+
+Examples:
+
+Input: a = 12, b = 18
+Output: 36
+Explanation: LCM of 12 and 18 is 36
+Input: a = 5, b = 11
+Output: 55
+Explanation: LCM of 5 and 11 is 55
+Constraints:
+
+1 ≤ a, b ≤ 104
+</P>
+
+### Solution: 
+
+```
+class Solution {
+  public:
+    int gcd(int a, int b){
+        if(a==0){
+            return b;
+        }
+        return gcd(b%a,a);
+    }
+    int lcm(int a, int b) {
+        // code here
+        return (a*b)/gcd(a,b);
+    }
+};
+```
+---
