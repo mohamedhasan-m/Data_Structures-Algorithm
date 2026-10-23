@@ -159,3 +159,103 @@ public:
 
 ```
 ---
+## Sort Llinked List of 0s, 1s and 2s (Geeks For Geeks): 
+
+<P>
+  Difficulty : Medium 
+
+  Given a linked list where nodes can contain values 0s, 1s, and 2s only. Your task is to rearrange the list so that all 0s appear at the beginning, followed by all 1s, and all 2s are placed at the end.
+
+Examples:
+
+
+Input: head = 1 → 2 → 2 → 1 → 2 → 0 → 2 → 2
+
+<img width="1000" height="97" alt="image" src="https://github.com/user-attachments/assets/2abb366a-df9c-46e2-9256-8ad361037266" />
+
+   
+Output: 0 → 1 → 1 → 2 → 2 → 2 → 2 → 2
+
+<img width="1000" height="97" alt="image" src="https://github.com/user-attachments/assets/c2432e89-cd91-4ebc-8d0b-a623ba9918c9" />
+
+Explanation: All the 0s are segregated to the left end of the linked list, 2s to the right end of the list, and 1s in between. The final list will be:
+   
+Input: head = 2 → 2 → 0 → 1
+
+<img width="591" height="97" alt="image" src="https://github.com/user-attachments/assets/6ed5efaf-2e41-4dfe-972a-04836b081548" />
+
+   
+Output: 0 → 1 → 2 → 2
+
+<img width="591" height="97" alt="image" src="https://github.com/user-attachments/assets/5f19a051-3873-406c-98ec-0a5f7256a720" />
+
+Explanation: After arranging all the 0s, 1s and 2s in the given format, the output will be:
+   
+Constraints:
+
+1 ≤ size of linked list ≤ 106
+0 ≤ node.data ≤ 2
+
+</P>
+
+### Solution: 
+
+```
+/* Node is defined as
+  class Node {
+  public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    Node* segregate(Node* head) {
+        // code here
+        if(head == NULL || head->next == NULL) return head;
+        
+        Node* zeroHead = new Node(-1);
+        Node* oneHead = new Node(-1);
+        Node* twoHead = new Node(-1);
+        
+        Node *zero = zeroHead;
+        Node *one = oneHead;
+        Node *two = twoHead;
+        Node *temp = head;
+        
+        while(temp){
+            if(temp->data == 0){
+                zero->next = temp;
+                zero = zero->next;
+            }
+            else if(temp->data == 1){
+                one->next = temp;
+                one = one->next;
+            }
+            else{
+                two->next = temp;
+                two = two->next;
+            }
+            temp = temp->next;
+        }
+        
+        zero->next = (oneHead->next) ? (oneHead->next) : (twoHead->next);
+        one->next = twoHead->next;
+        two->next = NULL;
+        
+        Node* newHead = zeroHead->next;
+        
+        delete zeroHead;
+        delete oneHead;
+        delete twoHead;
+        
+        return newHead;
+    }
+};
+```
+---
