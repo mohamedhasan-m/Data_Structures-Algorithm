@@ -143,3 +143,75 @@ public:
 };
 ```
 ---
+## Add 1 to a Linked list (Geeks For Geeks): 
+
+<p>
+  Difficulty: Medium 
+
+  You are given head of a linked list where each node contains a single digit. The digits together represent a number formed by concatenating the node values in order. Add 1 to this number and return the head of the modified linked list.
+
+Examples :
+<img width="400" height="244" alt="image" src="https://github.com/user-attachments/assets/4359765d-7252-4ebd-a607-dfc9d6089080" />
+
+Input: Head: 4->5->6
+Output: 457
+
+Explanation: 4->5->6 represents 456 and when 1 is added it becomes 457. 
+
+<img width="400" height="244" alt="image" src="https://github.com/user-attachments/assets/eb061efd-1dfd-42c8-88af-d9dd60e866d5" />
+
+
+Input: Head: 1->2->3
+Output: 124
+ 
+Explanation:  1->2->3 represents 123 and when 1 is added it becomes 124. 
+
+
+Input: Head: 0->0->1
+Output: 002
+Constraints:
+
+1 ≤ size of linked list ≤ 105
+0 ≤ node.data ≤ 9
+</p>
+
+### Solution: 
+
+```
+/* Structure of linked list Node
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    int addHelper(Node* temp){
+        if(temp == NULL){
+            return 1;
+        }
+        int carry = addHelper(temp->next);
+        temp->data += carry;
+        if(temp->data <10) return 0;
+        temp->data = 0;
+        return 1;
+    }
+    Node* addOne(Node* head) {
+        // code here
+        int carry = addHelper(head);
+        if(carry == 1){
+            Node* newNode = new Node(1);
+            newNode->next = head;
+            head = newNode;
+        }
+        return head;
+    }
+};
+```
+---
