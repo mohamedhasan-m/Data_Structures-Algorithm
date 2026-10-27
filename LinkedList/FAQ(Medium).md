@@ -2,7 +2,7 @@
 
 ---
 
-## Middle of the Linkedlist (876.Leetcode):
+## Middle of the Linkedlist (876.Leetcode):     
 <P>
   Difficulty: Easy
 
@@ -318,3 +318,10 @@ public:
 };
 ```
 ---
+## Linked List Cycle (141. Leetcode):
+
+<P>
+  Difficulty: Easy
+
+  
+</P>
