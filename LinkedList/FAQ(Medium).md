@@ -333,18 +333,21 @@ Return true if there is a cycle in the linked list. Otherwise, return false.
 
 Example 1:
 
+<img width="531" height="171" alt="image" src="https://github.com/user-attachments/assets/94449ab6-6ea8-4be5-b439-37f456739120" />
 
 Input: head = [3,2,0,-4], pos = 1
 Output: true
 Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
 Example 2:
 
+<img width="201" height="105" alt="image" src="https://github.com/user-attachments/assets/cb258929-d4b8-4d09-b59d-0e84375d8005" />
 
 Input: head = [1,2], pos = 0
 Output: true
 Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
 Example 3:
 
+<img width="65" height="65" alt="image" src="https://github.com/user-attachments/assets/34bdd0ff-a4d7-44c6-a16c-7b2462030e17" />
 
 Input: head = [1], pos = -1
 Output: false
