@@ -99,3 +99,128 @@ public:
 };
 ```
 ---
+##  Find pairs with given sum in doubly linked list(Code 360): 
+
+<P>
+  Difficulty: Easy 
+
+  Problem statement
+A doubly-linked list is a data structure that consists of sequentially linked nodes, and the nodes have reference to both the previous and the next nodes in the sequence of nodes.
+
+
+
+You are given a sorted doubly linked list of size 'n', consisting of distinct positive integers, and a number 'k'.
+
+
+
+Find out all the pairs in the doubly linked list with sum equal to 'k'.
+
+
+
+Example :
+Input: Linked List: 1 <-> 2 <-> 3 <-> 4 <-> 9 and 'k' = 5
+
+Output: (1, 4) and (2, 3)
+
+Explanation: There are 2 pairs in the linked list having sum 'k' = 5.
+Detailed explanation ( Input/output format, Notes, Images )
+Sample input 1:
+5
+1 2 3 4 9
+5
+
+
+Sample output 1
+2
+1 4
+2 3
+
+
+Explanation for sample input 1 :
+There are 2 pairs in the linked list having sum equal to 'k' (= 5).
+
+
+Sample input 2:
+5
+1 10 11 12 27
+7
+
+
+Sample output 2:
+0
+
+
+Explanation for sample output 2
+There is no pair in the linked list with sum equal to 'k' (= 7).
+
+
+Expected time complexity :
+The expected time complexity is O('n').
+
+
+Constraints:
+2 <= 'n' <= 10 ^ 4
+1 <= 'data' in any node <= 10 ^ 4
+1 <= 'k' <= 10 ^ 4
+
+'data' in every node is distinct.
+
+Time limit: 1 second
+</P>
+
+### Solution: 
+
+```
+/**
+ * Definition of doubly linked list:
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *prev;
+ *      Node *next;
+ *      Node() {
+ *          this->data = 0;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this->data = data;
+ *          this->prev = NULL;
+ *          this->next = NULL;
+ *      }
+ *      Node (int data, Node *next, Node *prev) {
+ *          this -> data = data;
+ *          this -> prev = prev;
+ *          this -> next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+
+Node* findTail(Node* head){
+    Node* tail = head;
+    while(tail->next != NULL) tail = tail->next;
+    return tail;
+}
+vector<pair<int, int>> findPairs(Node* head, int k)
+{
+    // Write your code here.
+    vector<pair<int,int>> ans;
+    if(head == NULL) return ans;
+    Node* left = head;
+    Node* right = findTail(head);
+    while(left->data < right->data){
+        if(left-> data + right->data == k){
+            ans.push_back({left->data, right->data});
+            left = left->next;
+            right = right->prev;
+        }
+        else if(left->data + right->data < k){
+            left = left->next;
+        }
+        else right = right->prev;
+    }
+    return ans;
+}
+```
+---
