@@ -550,3 +550,82 @@ public:
 };
 ```
 ---
+## Linked List Cycle II (142. Leetcode): 
+
+<P>
+  Difficulty: Medium 
+
+  Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.
+
+Do not modify the linked list.
+
+ 
+
+Example 1:
+<img width="531" height="171" alt="image" src="https://github.com/user-attachments/assets/2695ac0d-951f-43c4-9cbf-fb6ff41879bb" />
+
+
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+Example 2:
+<img width="201" height="105" alt="image" src="https://github.com/user-attachments/assets/982ce45c-9a8c-4cf7-ad07-e012b866c313" />
+
+
+Input: head = [1,2], pos = 0
+Output: tail connects to node index 0
+Explanation: There is a cycle in the linked list, where tail connects to the first node.
+Example 3:
+
+<img width="65" height="65" alt="image" src="https://github.com/user-attachments/assets/3dea4eb5-f1f9-4904-b57a-22a8f5823152" />
+
+Input: head = [1], pos = -1
+Output: no cycle
+Explanation: There is no cycle in the linked list.
+ 
+
+Constraints:
+
+The number of the nodes in the list is in the range [0, 104].
+-105 <= Node.val <= 105
+pos is -1 or a valid index in the linked-list.
+ 
+
+Follow up: Can you solve it using O(1) (i.e. constant) memory?
+</P>
+
+### Solution:
+
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                slow = head;
+                while(slow != fast){
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+                return slow;
+            }
+        }
+        return NULL;
+    }
+};
+```
+---
