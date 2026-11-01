@@ -392,3 +392,78 @@ public:
 };
 ```
 ---
+## Cycle Length in Linked List (Geeks For Geeks): 
+
+<P>
+  Difficulty: Medium 
+
+  Given the head of a linked list. A linked list contains a cycle if its last node is connected to a previous node. If the given list contains a cycle, return the length of the cycle. Otherwise, return 0.
+
+Note: Internally, the driver code uses an integer x to represent the position (1-based indexing) of the node to which the last node is connected. If x = 0, it means last node points to null which indicating there is no loop.
+
+Examples:
+
+Input: 
+<img width="656" height="136" alt="image" src="https://github.com/user-attachments/assets/27208282-6cd2-471d-bad8-52de88c6a21b" />
+
+Output: 4
+Explanation: There exists a loop in the linked list 2 -> 3 -> 4 -> 5, the length of the loop is 4.
+Input:
+<img width="662" height="137" alt="image" src="https://github.com/user-attachments/assets/8483b782-a1c4-41e5-81e8-6dd5560595a3" />
+
+Output: 3
+Explanation: There exists a loop in the linked list 19 -> 33 -> 10, the length of loop is 3.
+Input:
+<img width="730" height="97" alt="image" src="https://github.com/user-attachments/assets/c8f98178-c927-4962-ac29-6c18131e6b0c" />
+
+Output: 0
+Explanation: There is no loop.
+Constraints:
+
+1 ≤ size of linked list ≤ 105
+1 ≤ node.data ≤ 104
+0 ≤ x < head.size()
+
+</P>
+
+### Solution: 
+
+```
+/* Structure of Linked List Node
+class Node {
+ public:
+    int data;
+    Node *next;
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};*/
+
+class Solution {
+  public:
+    int findLength(Node* slow, Node* fast){
+        int cnt = 1;
+        fast = fast->next;
+        while(slow != fast){
+            cnt++;
+            fast = fast->next;
+        }
+        return cnt;
+    }
+    int lengthOfLoop(Node *head) {
+        // code here
+        Node* slow = head;
+        Node* fast = head;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                return findLength(slow,fast);
+            }
+        }
+        return 0;
+    }
+};
+```
+---
