@@ -224,3 +224,63 @@ vector<pair<int, int>> findPairs(Node* head, int k)
 }
 ```
 ---
+## Remove Duplicates From Sorted DLL (Geeks For Geeks): 
+
+<P>
+  Difficulty: Medium 
+
+  Given a doubly linked list of n nodes sorted by values, remove duplicate nodes present in the linked list.
+
+Examples:
+
+Input: head: 1<->1<->1<->2<->3<->4
+Output: 1<->2<->3<->4
+Explanation: Only the first occurance of node with value 1 is retained along with other distinct values. 
+Input: head: 1<->2<->2<->3<->3<->4<->4
+Output: 1<->2<->3<->4
+Explanation:
+Only the first occurance of nodes with values 2, 3 and 4 are retained, rest repeating nodes are deleted.
+Constraint:
+1 ≤ n ≤ 105
+
+
+</P>
+
+### Solution: 
+
+```
+/* Structure of a link list node
+class Node {
+  public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int value) {
+        data = value;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    Node* removeDuplicates(Node* headRef) {
+        // code here
+        Node* temp = headRef;
+        while(temp != NULL && temp->next != NULL){
+            Node* nextNode = temp->next;
+            while(nextNode != NULL && nextNode->data == temp->data){
+                Node* duplicate = nextNode;
+                nextNode = nextNode->next;
+                delete duplicate;
+            }
+            temp->next = nextNode;
+            if(nextNode != NULL) nextNode->prev = temp;
+            
+            temp = temp->next;
+        }
+        return headRef;
+    }
+};
+```
+---
