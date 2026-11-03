@@ -440,3 +440,171 @@ public:
 };
 ```
 ---
+##  Check if a Number is Prime or Not (TUF): 
+
+<P>
+ Difficulty: Easy
+
+ Given an integer num, return true if it is prime otherwise false.
+
+A prime number is a number that is divisible only by 1 and itself.
+
+Example 1:
+Input : num = 5
+
+Output : true
+
+Explanation : The factors of 5 are 1 and 5 only.
+
+So it satisfies the prime number condition.
+
+Example 2:
+Input : num = 15
+
+Output : false
+
+Explanation : The factors of 15 are 1, 3, 5, 15 only.
+
+As the number has factors other than 1 and itself, So it is not a prime number.
+
+Constraints:
+1 <= num <= 104
+</P>
+
+### Solution: 
+
+```
+class Solution {
+public:
+    bool check(int num, int divisor) {
+
+        // Base case: No divisor found
+        if (divisor > num / divisor) {
+            return true;
+        }
+
+        // If divisible, not prime
+        if (num % divisor == 0) {
+            return false;
+        }
+
+        // Recursive call
+        return check(num, divisor + 1);
+    }
+
+    bool checkPrime(int num) {
+
+        if (num <= 1) return false;
+
+        return check(num, 2);
+    }
+};
+```
+---
+
+## Reverse an array 2: 
+
+<P>
+ Difficulty: Easy 
+
+ Given an array nums of n integers, return reverse of the array.
+
+Example 1:
+Input : nums = [1, 2, 3, 4, 5]
+
+Output : [5, 4, 3, 2, 1]
+
+Example 2:
+Input : nums = [1, 3, 3, 3, 5]
+
+Output : [5, 3, 3, 3, 1]
+
+Constraints:
+1 <= n <= 100
+1 <= nums[i] <= 100
+</P>
+
+### Solution: 
+
+```
+class Solution {
+public:
+    void reverse(vector<int>& nums, int left, int right) {
+
+        // Base case
+        if (left >= right) return;
+
+        // Swap elements
+        swap(nums[left], nums[right]);
+
+        // Recursive call
+        reverse(nums, left + 1, right - 1);
+    }
+
+    vector<int> reverseArray(vector<int>& nums) {
+
+        reverse(nums, 0, nums.size() - 1);
+
+        return nums;
+    }
+};
+```
+---
+
+## Sum of Digits in a Given Number (TUF): 
+
+<P>
+ Difficulty: Easy 
+
+ Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+
+Example 1:
+Input : num = 529
+
+Output : 7
+
+Explanation : In first iteration the digits sum will be = 5 + 2 + 9 => 16
+
+In second iteration the digits sum will be 1 + 6 => 7.
+
+Now single digit is remaining , so we return it.
+
+Example 2:
+Input : num = 101
+
+Output : 2
+
+Explanation : In first iteration the digits sum will be = 1 + 0 + 1 => 2
+
+Now single digit is remaining , so we return it.
+
+Constraints:
+0 <= num <= 231 - 1
+</P>
+
+### Solution: 
+
+```
+class Solution {
+public:
+    int addDigits(int num) {
+
+        // Base case: Single digit
+        if (num < 10) {
+            return num;
+        }
+
+        int sum = 0;
+
+        // Calculate sum of digits
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+
+        // Recursive call
+        return addDigits(sum);
+    }
+};
+```
+---
