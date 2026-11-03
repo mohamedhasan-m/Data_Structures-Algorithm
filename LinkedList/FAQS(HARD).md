@@ -261,3 +261,205 @@ public:
 };
 ```
 ---
+## Flattening a Linked List (Geeks For Geeks): 
+
+<P>
+  Difficulty: Medium 
+
+  In a linked list, every node has two pointers: next and bottom. The heads of n linked lists are connected using the next pointer, while the bottom pointer points to the next node in the current linked list.
+
+Each linked list is sorted in non-decreasing order of data, and the head nodes are also sorted in non-decreasing order.
+
+Given the head of the first linked list, flatten the linked lists into a single sorted linked list such that every node is connected using only the bottom pointers.
+
+Examples:
+
+Input:
+<img width="734" height="396" alt="image" src="https://github.com/user-attachments/assets/2827559e-77d8-4f14-8329-6337b6fc1d5d" />
+
+Output: 5 -> 7 -> 8 -> 10 -> 19 -> 20 -> 22 -> 28 -> 40 -> 45.
+Explanation: 
+Bottom pointer of 5 is pointing to 7.
+Bottom pointer of 7 is pointing to 8.
+Bottom pointer of 10 is pointing to 20 and so on.
+So, after flattening the linked list the sorted list will be 
+5 -> 7 -> 8 -> 10 -> 19 -> 20 -> 22 -> 28 -> 40 -> 45.
+Input:
+<img width="734" height="334" alt="image" src="https://github.com/user-attachments/assets/617621ad-6e3c-4d7b-ade4-299db8abe916" />
+
+Output: 5 -> 7 -> 8 -> 10 -> 19 -> 22 -> 28 -> 30 -> 50
+Explanation:
+Bottom pointer of 5 is pointing to 7.
+Bottom pointer of 7 is pointing to 8.
+Bottom pointer of 8 is pointing to 30 and so on.
+So, after flattening the linked list the sorted list will be 
+5 -> 7 -> 8 -> 10 -> 19 -> 22 -> 28 -> 30 -> 50.
+Constraints:
+
+0 ≤ n ≤ 104
+head.size() = n
+1 ≤ head[i].size() ≤ 50
+1 ≤ head[i][j] ≤ 5*105
+
+</P>
+
+### Solution (Recursive Approcah): 
+
+```
+/* Structure of Linked List Node
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* bottom;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+        bottom = nullptr;
+    }
+};*/
+
+class Solution {
+public:
+
+    Node* merge(Node* list1, Node* list2) {
+
+        Node* dummyNode = new Node(-1);
+        Node* res = dummyNode;
+
+        while (list1 != NULL && list2 != NULL) {
+
+            if (list1->data < list2->data) {
+                res->bottom = list1;
+                list1 = list1->bottom;
+            }
+            else {
+                res->bottom = list2;
+                list2 = list2->bottom;
+            }
+
+            res = res->bottom;
+            res->next = NULL;
+        }
+
+        if (list1) {
+            res->bottom = list1;
+        }
+        else {
+            res->bottom = list2;
+        }
+
+        while (res->bottom != NULL) {
+            res = res->bottom;
+            res->next = NULL;
+        }
+
+        Node* ans = dummyNode->bottom;
+        delete dummyNode;
+
+        return ans;
+    }
+
+    Node* flatten(Node* head) {
+
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+
+        Node* mergedHead = flatten(head->next);
+
+        head = merge(head, mergedHead);
+
+        return head;
+    }
+};
+```
+
+### Solution (Divide and Conquer Approach): 
+```
+/* Structure of Linked List Node
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* bottom;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+        bottom = nullptr;
+    }
+};*/
+
+class Solution {
+public:
+
+    Node* merge(Node* list1, Node* list2) {
+
+        Node* dummyNode = new Node(-1);
+        Node* res = dummyNode;
+
+        while (list1 != NULL && list2 != NULL) {
+
+            if (list1->data < list2->data) {
+                res->bottom = list1;
+                list1 = list1->bottom;
+            }
+            else {
+                res->bottom = list2;
+                list2 = list2->bottom;
+            }
+
+            res = res->bottom;
+            res->next = NULL;
+        }
+
+        if (list1) {
+            res->bottom = list1;
+        }
+        else {
+            res->bottom = list2;
+        }
+
+        while (res->bottom != NULL) {
+            res = res->bottom;
+            res->next = NULL;
+        }
+
+        Node* ans = dummyNode->bottom;
+        delete dummyNode;
+
+        return ans;
+    }
+
+    Node* flatten(Node* head) {
+
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+
+        Node* a = head;
+        Node* b = head->next;
+
+        // Split the lists into two halves
+        Node* prev = NULL;
+        Node* slow = head;
+        Node* fast = head;
+
+        while (fast != NULL && fast->next != NULL) {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        prev->next = NULL;
+
+        Node* left = flatten(head);
+        Node* right = flatten(slow);
+
+        return merge(left, right);
+    }
+};
+```
+---
