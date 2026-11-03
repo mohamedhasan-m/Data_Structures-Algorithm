@@ -1,4 +1,4 @@
-<img width="632" height="95" alt="image" src="https://github.com/user-attachments/assets/9a523375-cb56-449a-bc67-ff236a15cf9b" /># Linked List Introduction and Oprations on 1D LinkedList: 
+# Linked List Introduction and Oprations on 1D LinkedList: 
 
 ---
 ## Search in a Linked List (Geeks For Geeks): 
