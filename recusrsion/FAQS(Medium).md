@@ -257,3 +257,61 @@ public:
 <img width="1536" height="1024" alt="Combination Sum II Recursion Tree Infographic" src="https://github.com/user-attachments/assets/f3438fd0-ff85-44b8-b9c6-70ac1a7865e6" />
 
 ---
+## Subsets (78.Leetcode): 
+
+<P>
+	Difficulty: Medium 
+
+	Given an integer array nums of unique elements, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3]
+Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+Example 2:
+
+Input: nums = [0]
+Output: [[],[0]]
+ 
+
+Constraints:
+
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+All the numbers of nums are unique.
+</P>
+
+### Solution: 
+
+```
+class Solution {
+public:
+    void solve(int ind, int n, vector<int> &nums, vector<vector<int>> &ans, vector<int> &ds){
+        if(ind == n){
+            ans.push_back(ds);
+            return;
+        }
+        solve(ind+1, n, nums, ans, ds);
+        ds.push_back(nums[ind]);
+        solve(ind+1,n,nums,ans,ds);
+        ds.pop_back();
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> ans;
+        vector<int> ds;
+        solve(0, n,nums, ans, ds);
+        return ans;
+    }
+};
+```
+#### Recursion Tree: 
+
+<img width="1536" height="1024" alt="Subset Recursion Tree Infographic" src="https://github.com/user-attachments/assets/d385b285-3dc2-4cb6-b7d0-f98648fc9826" />
+
+
+---
