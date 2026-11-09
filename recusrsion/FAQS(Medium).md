@@ -153,6 +153,34 @@ All elements of candidates are distinct.
 ### Solution: 
 
 ```
-
+class Solution {
+public:
+    void findCombination(int ind, int target, vector<int> &arr, vector<vector<int>> &ans, vector<int> &ds){
+        if(ind == arr.size()){
+            if(target == 0){
+                ans.push_back(ds);
+            }
+            return;
+        }
+        // pick up the element
+        if(arr[ind] <= target){
+            ds.push_back(arr[ind]);
+            findCombination(ind, target - arr[ind], arr, ans, ds);
+            ds.pop_back();
+        }
+        findCombination(ind+1, target, arr, ans, ds);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>ans;
+        vector<int> ds;
+        findCombination(0, target, candidates, ans, ds);
+        return ans;
+    }
+};
 ```
+
+#### Recusrsion Tree:
+
+<img width="1536" height="1024" alt="Combination Sum I Recursion Tree Infographic" src="https://github.com/user-attachments/assets/fa2e13a1-373b-45fb-a963-05ffcdfbae9d" />
+
 ---
