@@ -315,3 +315,62 @@ public:
 
 
 ---
+## Subsets II(90.Leetcode): 
+
+<P>
+	Difficuty: Medium 
+
+	Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,2]
+Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+Example 2:
+
+Input: nums = [0]
+Output: [[],[0]]
+ 
+
+Constraints:
+
+1 <= nums.length <= 10
+-10 <= nums[i] <= 10
+</P>
+
+### Solution: 
+
+```
+class Solution {
+public:
+    void solve(vector<int> &nums, int index, vector<vector<int>> &ans, vector<int> &ds){
+        ans.push_back(ds);
+        for(int i = index;i<nums.size();i++){
+            if(i>index && nums[i] == nums[i-1]){
+                continue;
+            }
+            ds.push_back(nums[i]);
+            solve(nums, i+1, ans, ds);
+            ds.pop_back();
+        }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        vector<int> ds;
+        solve(nums, 0, ans, ds);
+        return ans;
+    }
+};
+```
+
+### Recursion Tree: 
+
+<img width="1536" height="1024" alt="Subsets II Recursion Tree Infographic" src="https://github.com/user-attachments/assets/05792a00-03a0-4b3a-82fa-da4f6a787739" />
+
+---
+
