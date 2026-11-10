@@ -449,3 +449,89 @@ public:
 <img width="1536" height="1024" alt="Combination Sum III Recursion Tree Infographic" src="https://github.com/user-attachments/assets/fb0a5b42-8685-439b-99a6-4985f8f86c9e" />
 
 ---
+## Letter Combinations of a Phone Number: (17. Leetcode): 
+
+<P>
+	Difficulty: Medium 
+
+	Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+<img width="1200" height="973" alt="image" src="https://github.com/user-attachments/assets/8168862e-15f1-4ecd-bf7c-e3d056fb7d5d" />
+
+ 
+
+Example 1:
+
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+Example 2:
+
+Input: digits = "2"
+Output: ["a","b","c"]
+ 
+
+Constraints:
+
+1 <= digits.length <= 4
+digits[i] is a digit in the range ['2', '9']
+</P>
+
+### Solution: 
+
+```
+class Solution {
+private:
+   vector<string> answer;
+   string digits;
+
+   string getLetters(char digit){
+    switch(digit){
+        case'2':
+            return "abc";
+        case'3':
+            return "def";
+        case'4':
+            return "ghi";
+        case'5':
+            return "jkl";
+        case'6':
+            return "mno";
+        case'7':
+            return "pqrs";
+        case'8':
+            return "tuv";
+        case'9':
+            return "wxyz";
+    }
+    return "";
+   }
+
+   void generateStrings(int i , string &current){
+    if ( i == digits.length()){
+        answer.push_back(current);
+        return;
+    }
+    // place all possible letters to at this ith place
+    string letters = getLetters(digits[i]);
+    for(int j = 0; j<letters.length(); j++){
+        current.push_back(letters[j]);
+        generateStrings(i+1, current);
+        current.pop_back();
+    }
+   }
+public:
+    vector<string> letterCombinations(string digits) {
+        this->digits = digits;
+
+        answer.clear();
+
+        string current = "";
+        generateStrings(0, current);
+
+        return answer;
+    }
+};
+```
+---
